@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-04-2025 a las 10:38:53
+-- Tiempo de generación: 31-03-2026 a las 02:29:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,6 +44,7 @@ CREATE TABLE `estudiantes` (
 
 INSERT INTO `estudiantes` (`dni`, `Nombre`, `Apellido`, `Edad`, `Grado`, `calificacion`, `estado`, `foto`) VALUES
 ('23423523456', 'Alan', 'Pérsico', 16, 'Sexto', 10, 'Aprobado', 'img/Alan_P__rsico_12212313.png'),
+('33333333', 'juan', 'reichert', 38, 'Séptimo', 1, 'Reprobado', 'img/juan_reichert_33333333.png'),
 ('3563463', 'Mariliz', 'Almaraz', 18, 'Sexto', 10, 'Aprobado', 'img/Mariliz_Almaraz_871234.png'),
 ('457473', 'Belén', 'Tamburrino', 17, 'Sexto', 10, 'Aprobado', 'img/Belen_Tamburrino_47950900.png');
 
