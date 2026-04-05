@@ -32,6 +32,7 @@ $estudiantes = mysqli_query($conn, "SELECT dni, Nombre, Apellido FROM estudiante
     <meta charset="UTF-8">
     <title>Capturar y Guardar Foto con PHP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
 <div class="container py-4">
