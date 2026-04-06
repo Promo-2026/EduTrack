@@ -19,19 +19,22 @@ if($_POST){
         }
         exit();
     } else {
-        echo "Usuario o contraseña incorrectos";
+        echo "<div class='alert error'>Usuario o contraseña incorrectos</div>";
     }
 }
 ?>
 
 <link rel="stylesheet" href="style.css">
 
-<div class="container text-center mt-5">
-    <h2>Login</h2>
-    <form method="POST" class="card p-4 mx-auto" style="max-width:400px;">
-        <input name="user" placeholder="Usuario" class="form-control mb-2">
-        <input name="pass" type="password" placeholder="Contraseña" class="form-control mb-2">
-        <button class="btn btn-primary">Ingresar</button>
+<div class="login-container">
+    <form method="POST" class="card login-card">
+        <h2 class="text-center">Login</h2>
+
+        <input name="user" placeholder="Usuario" required>
+        <input name="pass" type="password" placeholder="Contraseña" required>
+
+        <button>Ingresar</button>
+
         <a href="registro.php">Crear cuenta</a>
     </form>
 </div>

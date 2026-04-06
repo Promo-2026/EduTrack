@@ -8,7 +8,7 @@
 
 /* BODY */
 body {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    background: #ccc;
     min-height: 100vh;
     color: #333;
 }
@@ -124,4 +124,19 @@ a:hover {
 .error {
     background: #f8d7da;
     color: #721c24;
+}
+
+/* CONTENEDOR CENTRADO */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* TARJETA LOGIN */
+.login-card {
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
 }
