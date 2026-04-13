@@ -62,19 +62,24 @@ while($m = mysqli_fetch_assoc($mat)){
 </form>
 
 
-<section class="form-section">
-<h4>Asignar Asistencia</h4>
 <form method="POST" action="guardar_asistencia.php">
-<input name="dni" placeholder="DNI" class="form-control mb-2">
+
+<select name="dni" class="form-control mb-2">
+<?php
+$res = mysqli_query($conn,"SELECT dni, nombre FROM estudiantes");
+while($row = mysqli_fetch_assoc($res)){
+    echo "<option value='".$row['dni']."'>".$row['nombre']."</option>";
+}
+?>
+</select>
+
 <input name="porcentaje" type="number" class="form-control mb-2">
 <button class="btn btn-warning">Guardar Asistencia</button>
+
 </form>
-</section>
 
 <section class="form-section">
-
 <h4>Agregar Examen</h4>
-
 <form method="POST" action="guardar_examen.php">
 
 <!-- MATERIA -->

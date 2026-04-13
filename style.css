@@ -1,142 +1,757 @@
+/* ============================================
+   EduTrack - Portal Estudiantil
+   Diseño idéntico al panel de Lovable
+   Paleta: Teal, Ámbar, Crema
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
 /* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
 }
 
-/* BODY */
+/* VARIABLES */
+:root {
+    --teal: #2a8a7a;
+    --teal-light: #35a08e;
+    --teal-dark: #1e6b5e;
+    --amber: #d4912a;
+    --amber-light: #e0a040;
+    --cream: #f7f3eb;
+    --cream-dark: #ebe7de;
+    --text-dark: #1a3a4a;
+    --text-muted: #6b7f8a;
+    --border-light: #e8e4dc;
+    --white: #ffffff;
+    --red: #dc3545;
+    --green: #2a8a7a;
+}
+
 body {
-    background: #ccc;
+    background: var(--cream);
     min-height: 100vh;
-    color: #333;
+    color: var(--text-dark);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-/* CONTENEDOR GENERAL */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-dark);
+}
+
+/* =====================
+   HEADER GRADIENT (como el panel Lovable)
+   ===================== */
+.navbar,
+.header-bar {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light)) !important;
+    backdrop-filter: none;
+    padding: 16px 24px;
+    border-radius: 0;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    box-shadow: 0 2px 15px rgba(42, 138, 122, 0.25);
+}
+
+.navbar h2,
+.header-bar h2,
+.navbar h1,
+.header-bar h1 {
+    color: white !important;
+    margin-bottom: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.navbar p,
+.header-bar p,
+.navbar span,
+.header-bar span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.navbar a,
+.header-bar a {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+
+.navbar a:hover,
+.header-bar a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+}
+
+/* =====================
+   CONTENEDOR PRINCIPAL
+   ===================== */
 .container {
     width: 90%;
-    max-width: 1100px;
-    margin: 30px auto;
+    max-width: 900px;
+    margin: 24px auto;
+    padding-bottom: 40px;
 }
 
-/* TARJETAS (EFECTO MODERNO) */
+/* =====================
+   STATS ROW (promedio, asistencia %, materias)
+   Fila de tarjetas con números grandes
+   ===================== */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(42, 138, 122, 0.08);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(42, 138, 122, 0.1);
+}
+
+.stat-card .stat-number {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--teal);
+    line-height: 1;
+}
+
+.stat-card .stat-number.danger {
+    color: var(--red);
+}
+
+.stat-card .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* =====================
+   TARJETAS (CARDS) estilo glass
+   ===================== */
 .card {
-    background: white;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    padding: 0;
     margin-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    border-radius: 12px;
+    border: 1px solid rgba(42, 138, 122, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: fadeInUp 0.4s ease-out;
+    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(42, 138, 122, 0.1);
 }
 
-/* TITULOS */
-h1, h2, h3 {
-    margin-bottom: 15px;
-    color: #2c3e50;
+/* Card con borde destructivo (materias adeudadas) */
+.card.card-danger {
+    border-color: rgba(220, 53, 69, 0.25);
 }
 
-/* BOTONES */
-button {
-    background: #4facfe;
-    color: white;
+/* Card header con ícono */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 24px 0;
+    background: none;
+    border-bottom: none;
+}
+
+.card-header .card-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--teal);
+    flex-shrink: 0;
+}
+
+.card-header .card-icon.amber {
+    color: var(--amber);
+}
+
+.card-header .card-icon.danger {
+    color: var(--red);
+}
+
+.card-header h3,
+.card-header .card-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
     border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
+}
+
+.card-header .card-title.danger {
+    color: var(--red);
+}
+
+.card-body {
+    padding: 16px 24px 24px;
+}
+
+/* =====================
+   ITEMS EN LISTA (notas, exámenes, comentarios)
+   ===================== */
+.list-item {
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgba(42, 138, 122, 0.04);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-item:last-child {
+    margin-bottom: 0;
+}
+
+.list-item .item-info {
+    flex: 1;
+}
+
+.list-item .item-title {
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.list-item .item-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.list-item .item-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* =====================
+   BADGES (notas, materias)
+   ===================== */
+.badge-nota {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.badge-nota.aprobado {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
+}
+
+.badge-nota.desaprobado {
+    background: var(--red);
+    color: white;
+}
+
+.badge-materia {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 9999px;
+    background: var(--red);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin: 4px 4px 4px 0;
+}
+
+.badge-fecha {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* =====================
+   BARRA DE PROGRESO (Asistencia)
+   ===================== */
+.progress {
+    background: var(--cream-dark);
+    border-radius: 10px;
+    height: 14px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.progress-bar {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+.attendance-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.attendance-info .att-detail {
+    color: var(--text-muted);
+}
+
+.attendance-info .att-percent {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.attendance-warning {
+    color: var(--red);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+/* =====================
+   COMENTARIOS
+   ===================== */
+.comment-item {
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgba(42, 138, 122, 0.04);
+    margin-bottom: 10px;
+}
+
+.comment-item:last-child {
+    margin-bottom: 0;
+}
+
+.comment-item .comment-text {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.comment-item .comment-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* =====================
+   ESTADO ACADÉMICO
+   ===================== */
+.estado-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 9999px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.estado-badge.aprobado {
+    background: rgba(42, 138, 122, 0.12);
+    color: var(--teal);
+}
+
+.estado-badge.intensificacion {
+    background: rgba(212, 145, 42, 0.12);
+    color: var(--amber);
+}
+
+/* =====================
+   TEXTO VACÍO
+   ===================== */
+.empty-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 8px 0;
+}
+
+/* =====================
+   BOTONES
+   ===================== */
+button,
+.btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
 }
 
-button:hover {
-    background: #00c6ff;
+button:not([class*="btn-"]) {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    color: white;
 }
 
-/* INPUTS */
-input, select {
+button:not([class*="btn-"]):hover {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    box-shadow: 0 4px 15px rgba(42, 138, 122, 0.35);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light)) !important;
+    border: none !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal)) !important;
+    box-shadow: 0 4px 15px rgba(42, 138, 122, 0.35) !important;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--teal), var(--teal-light)) !important;
+    border: none !important;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal)) !important;
+    box-shadow: 0 4px 15px rgba(42, 138, 122, 0.35) !important;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--amber), var(--amber-light)) !important;
+    border: none !important;
+    color: white !important;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #c0820f, var(--amber)) !important;
+    box-shadow: 0 4px 15px rgba(212, 145, 42, 0.35) !important;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #3ba6d6, #50b8e8) !important;
+    border: none !important;
+    color: white !important;
+}
+
+.btn-dark {
+    background: var(--text-dark) !important;
+    border: none !important;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #e8525f) !important;
+    border: none !important;
+}
+
+.btn-secondary {
+    background: #8a9aaa !important;
+    border: none !important;
+}
+
+/* =====================
+   INPUTS & SELECTS
+   ===================== */
+input,
+select,
+textarea,
+.form-control {
     width: 100%;
-    padding: 10px;
+    padding: 11px 14px;
     margin-top: 5px;
     margin-bottom: 15px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    border-radius: 10px;
+    border: 2px solid var(--border-light);
+    background: #fdfcf9;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* TABLAS */
+input:focus,
+select:focus,
+textarea:focus,
+.form-control:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(42, 138, 122, 0.15);
+    background: white;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* =====================
+   TABLAS (profesor)
+   ===================== */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 
 table th {
-    background: #4facfe;
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
     color: white;
-    padding: 10px;
+    padding: 12px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 11px 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.92rem;
 }
 
-/* FILAS HOVER */
+table tr:nth-child(even) {
+    background: #f9f7f2;
+}
+
 table tr:hover {
-    background: #f1f9ff;
+    background: rgba(42, 138, 122, 0.06);
 }
 
-/* NAVBAR */
-.navbar {
-    background: rgba(255,255,255,0.9);
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-}
-
-/* LINKS */
-a {
-    text-decoration: none;
-    color: #4facfe;
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* ALERTAS */
-.alert {
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.success {
-    background: #d4edda;
-    color: #155724;
-}
-
-.error {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-/* CONTENEDOR CENTRADO */
+/* =====================
+   LOGIN
+   ===================== */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background: linear-gradient(135deg, #f7f3eb 0%, #e8f0ed 50%, #f7f3eb 100%);
 }
 
-/* TARJETA LOGIN */
 .login-card {
     width: 100%;
-    max-width: 350px;
+    max-width: 380px;
     text-align: center;
+    padding: 40px 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(42, 138, 122, 0.12);
+    border: 1px solid rgba(42, 138, 122, 0.08);
 }
+
+.login-card h2 {
+    color: var(--teal);
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.login-card a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* =====================
+   FORMULARIOS (profesor)
+   ===================== */
+.form-section {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    padding: 24px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(42, 138, 122, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    overflow-x: auto;
+}
+
+/* =====================
+   LINKS
+   ===================== */
+a {
+    text-decoration: none;
+    color: var(--teal);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--amber);
+    text-decoration: underline;
+}
+
+/* =====================
+   ALERTAS
+   ===================== */
+.alert {
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.success,
+.alert-success {
+    background: rgba(42, 138, 122, 0.12);
+    color: #1a6b5e;
+    border: 1px solid rgba(42, 138, 122, 0.2);
+}
+
+.error,
+.alert-danger {
+    background: #fde8e8;
+    color: #a82020;
+    border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+/* =====================
+   COLORES TEXTO
+   ===================== */
+.text-success { color: var(--teal) !important; font-weight: 700; }
+.text-warning { color: var(--amber) !important; font-weight: 700; }
+.text-danger  { color: var(--red) !important; font-weight: 600; }
+
+/* =====================
+   FOTOS
+   ===================== */
+img[src*="img/"],
+img[src*="fotos/"] {
+    border-radius: 12px;
+    border: 3px solid rgba(42, 138, 122, 0.2);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+video {
+    border-radius: 12px;
+    border: 3px solid rgba(42, 138, 122, 0.15);
+    margin: 10px 0;
+}
+
+/* =====================
+   RESPONSIVE
+   ===================== */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 15px auto;
+    }
+
+    .stats-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card-body {
+        padding: 12px 16px 16px;
+    }
+
+    h2 { font-size: 1.5rem; }
+
+    table th, table td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* =====================
+   ANIMACIÓN
+   ===================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card, .form-section, .login-card, .stat-card {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* =====================
+   UTILIDADES
+   ===================== */
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1.5rem; }
+.p-3 { padding: 1rem; }
+.text-center { text-align: center; }
+.flex-wrap { display: flex; flex-wrap: wrap; }

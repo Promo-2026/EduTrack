@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-04-2026 a las 21:59:12
+-- Tiempo de generación: 13-04-2026 a las 18:11:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,12 +38,9 @@ CREATE TABLE `asistencia` (
 --
 
 INSERT INTO `asistencia` (`id`, `dni`, `porcentaje`) VALUES
-(1, '77', 50),
-(2, '23423523456', 90),
-(3, '23423523456', 100),
-(4, '23423523456', 100),
-(5, '23423523456', 100),
-(6, '23423523456', 100);
+(1, '77', 100),
+(6, '23423523456', 100),
+(8, '999', 100);
 
 -- --------------------------------------------------------
 
@@ -91,7 +88,8 @@ INSERT INTO `estudiantes` (`dni`, `Nombre`, `Apellido`, `Edad`, `Grado`, `califi
 ('3563463', 'Mariliz', 'Almaraz', 18, 'Sexto', 10, 'Aprobado', 'img/Mariliz_Almaraz_871234.png'),
 ('457473', 'Belén', 'Tamburrino', 17, 'Sexto', 10, 'Aprobado', 'img/Belen_Tamburrino_47950900.png'),
 ('5244242', '1223', '', 0, 'Sin asignar', 0, '', ''),
-('77', 'Bianca', 'L', 18, '7', 8, '-', NULL);
+('77', 'Bianca', 'L', 18, '7', 8, '-', NULL),
+('999', 'mar', '', 0, 'Sin asignar', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -189,7 +187,8 @@ INSERT INTO `usuarios` (`id`, `username`, `password`, `rol`, `dni`, `foto`) VALU
 (2, 'Jake', '123', 'profesor', '48229226', NULL),
 (3, 'Alan', '123', 'alumno', '23423523456', 'img/Alan_P__rsico_12212313.png'),
 (4, '1223', '12', 'alumno', '5244242', ''),
-(5, 'ari', '1', 'profesor', '366363', '');
+(5, 'ari', '1', 'profesor', '366363', ''),
+(6, 'mar', '12', 'alumno', '999', '');
 
 --
 -- Índices para tablas volcadas
@@ -199,7 +198,8 @@ INSERT INTO `usuarios` (`id`, `username`, `password`, `rol`, `dni`, `foto`) VALU
 -- Indices de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `comentarios`
@@ -245,7 +245,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
@@ -275,7 +275,7 @@ ALTER TABLE `notas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

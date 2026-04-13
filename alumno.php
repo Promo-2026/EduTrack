@@ -49,7 +49,7 @@ $resAsis = mysqli_query($conn,"SELECT porcentaje FROM asistencia WHERE dni='$dni
 $asis = mysqli_fetch_assoc($resAsis);
 
 if(!$asis){
-    $asis['porcentaje'] = 0; // valor por defecto
+    $asis['porcentaje'] = 0;
 }
 ?>
 
